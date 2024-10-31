@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Navigation Bar</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 20%;
+            height: 100%;
+            background-color: #bdbfc6;
+            color: white;
+            position: fixed;
+            /* Fix the sidebar on the right */
+            top: 0;
+            right: 0;
+            /* Align to the right */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            transition: width 0.3s;
+            /* Smooth transition for width */
+        }
+
+        .logo img {
+            width: 100%;
+            /* Resize logo */
+            margin-bottom: 20px;
+        }
+
+        nav {
+            width: 100%;
+            /* Full width for navigation */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove bullets */
+            padding: 0;
+            /* Remove padding */
+            margin: 0;
+            /* Remove margin */
+        }
+
+        nav ul li {
+            width: 100%;
+            /* Full width for list items */
+        }
+
+        nav ul li a {
+            display: block;
+            /* Block-level for easier clicking */
+            padding: 15px;
+            /* Add some padding */
+            color: white;
+            /* Text color */
+            text-decoration: none;
+            /* Remove underline */
+            transition: background-color 0.3s, transform 0.2s;
+            /* Transition for hover effect */
+            text-align: center;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+            /* Darker background on hover */
+            transform: translateX(-5px);
+            /* Move link slightly on hover to the left */
+        }
+
+        .content {
+            margin-right: 20%;
+            /* Offset content to the left of the sidebar */
+            /* padding: 20px; */
+            /* Add padding */
+        }
+
+        h1 {
+            text-align: center;
+            background-color: rgb(27, 135, 27);
+            width: 100%;
+            margin: auto;
+            height: 50px;
+            padding-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="./Images/logoo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <!-- <li><a onclick="openLink(`https://192.168.1.141/AppEngine/?tenant=training&appId=a718a645-7560-48b9-8375-2f7092d85896`)">Home</a></li>
+                <li><a onclick="openLink(`https://192.168.1.141/AppEngine/?tenant=training&appId=44a33b40-2559-480f-9b0b-bae2a4f89cca`)">Services</a></li>
+                <li><a onclick="openLink(`https://192.168.1.141/AppEngine/?tenant=training&appId=3fc7c6a8-430d-413e-83a5-8fb0e3cf3234`)">Contact</a></li> -->
+          
+                <li><a href = "https://192.168.1.141/AppEngine/?tenant=training&appId=a718a645-7560-48b9-8375-2f7092d85896">Home</a></li>
+                <li><a href = "https://192.168.1.141/AppEngine/?tenant=training&appId=44a33b40-2559-480f-9b0b-bae2a4f89cca">Services</a></li>
+                <li><a href = "https://192.168.1.141/AppEngine/?tenant=training&appId=3fc7c6a8-430d-413e-83a5-8fb0e3cf3234">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <h1>Welcome to My Website</h1>
+        <div style="width: 100%; height:100%;">
+            <iframe style="width: 80vw; height: 88vh;"
+                src="https://192.168.1.141/AppEngine/?tenant=training&appId=3fc7c6a8-430d-413e-83a5-8fb0e3cf3234"></iframe>
+        </div>
+    </div>
+    <script>
+        // In your second HTML page (e.g., newpage.html)
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     // Get the query parameters from the URL
+        //     const params = new URLSearchParams(window.location.search);
+        //     const data = params.get('data');
+
+        //     if (data) {
+        //         // Decode and parse the data
+        //         const parsedData = JSON.parse(decodeURIComponent(data));
+
+        //         // Use the data in your HTML
+        //         // document.getElementById('output').textContent = JSON.stringify(parsedData, null, 2);
+        //         console.log(parsedData);
+        //     } else {
+        //         console.error('No data found');
+        //     }
+        // });
+
+
+            
+            // In your second HTML page (e.g., newpage.html)
+        window.addEventListener('message', (event) => {
+            console.log('Received message from:', event.origin);
+            const {token} = event.data;
+            if (token) {
+                    var Frame = document.querySelector("iframe");
+                    Frame.contentWindow.postMessage({token : token},"https://192.168.1.141");
+                console.log("send") 
+            } else {
+                console.error('No data received');
+            }
+        });
+
+        function openLink(link)
+        {
+            let Frame = document.querySelector("iframe");
+            Frame.src = link;
+
+        }
+    </script>
+</body>
+
+</html>
